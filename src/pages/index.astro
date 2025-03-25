@@ -1,0 +1,179 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const services = [
+  {
+    title: "Обслуживание аквариумов",
+    description: "Профессиональный уход за аквариумами любой сложности",
+    icon: "fa-tools",
+    link: "/service",
+  },
+  {
+    title: "Аквадизайн",
+    description: "Создание уникальных подводных ландшафтов",
+    icon: "fa-paint-brush",
+    link: "/aquadesign",
+  },
+  {
+    title: "Изготовление аквариумов",
+    description: "Производство аквариумов под заказ",
+    icon: "fa-fish",
+    link: "/aquariums",
+  },
+];
+
+const advantages = [
+  {
+    title: "Опыт работы",
+    description: "Более 10 лет на рынке",
+    icon: "fa-star",
+  },
+  {
+    title: "Выезд на дом",
+    description: "В любой район города",
+    icon: "fa-truck",
+  },
+  {
+    title: "Гарантия качества",
+    description: "На все виды работ",
+    icon: "fa-shield",
+  },
+];
+
+const workSteps = [
+  {
+    number: "01",
+    title: "Консультация",
+    description: "Бесплатная консультация и выезд на объект",
+  },
+  {
+    number: "02",
+    title: "Проект",
+    description: "Разработка индивидуального проекта",
+  },
+  {
+    number: "03",
+    title: "Реализация",
+    description: "Выполнение работ в оговоренные сроки",
+  },
+  {
+    number: "04",
+    title: "Поддержка",
+    description: "Техническое обслуживание и консультации",
+  },
+];
+---
+
+<Layout>
+
+  {/* Hero Section */}
+  <section
+    class="bg-gradient-to-r from-[#1a4b84] to-[#0a2b4a] text-white py-20 relative overflow-hidden"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          Профессиональное обслуживание аквариумов в Екатеринбурге
+        </h1>
+        <p class="text-xl md:text-2xl mb-8">
+          Создаем и поддерживаем подводные миры для вашего дома и бизнеса
+        </p>
+        <a
+          href="tel:+79120330555"
+          class="bg-[#4fc3f7] text-[#0a2b4a] px-8 py-4 rounded-full text-lg font-bold hover:bg-[#3ab1e3] transition-colors"
+        >
+          +7 (912) 033-05-55
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* Services Section */}
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center mb-12">Наши услуги</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {
+          services.map((service) => (
+            <a
+              href={service.link}
+              class="group p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow"
+            >
+              <div class="text-[#4fc3f7] text-4xl mb-4">
+                <i class={`fas ${service.icon}`} />
+              </div>
+              <h3 class="text-xl font-bold mb-2 group-hover:text-[#4fc3f7] transition-colors">
+                {service.title}
+              </h3>
+              <p class="text-gray-600">{service.description}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* Advantages Section */}
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center mb-12">Почему выбирают нас</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {
+          advantages.map((advantage) => (
+            <div class="text-center p-6">
+              <div class="text-[#4fc3f7] text-4xl mb-4">
+                <i class={`fas ${advantage.icon}`} />
+              </div>
+              <h3 class="text-xl font-bold mb-2">{advantage.title}</h3>
+              <p class="text-gray-600">{advantage.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* How It Works Section */}
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center mb-12">Как мы работаем</h2>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        {
+          workSteps.map((step) => (
+            <div class="text-center">
+              <div class="text-[#4fc3f7] text-5xl font-bold mb-4">
+                {step.number}
+              </div>
+              <h3 class="text-xl font-bold mb-2">{step.title}</h3>
+              <p class="text-gray-600">{step.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* CTA Section */}
+  <section
+    class="py-20 bg-gradient-to-r from-[#1a4b84] to-[#0a2b4a] text-white"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold mb-8">Создайте свой подводный мир</h2>
+      <div class="flex flex-col md:flex-row justify-center gap-4">
+        <a
+          href="tel:+79120330555"
+          class="bg-[#4fc3f7] text-[#0a2b4a] px-8 py-4 rounded-full text-lg font-bold hover:bg-[#3ab1e3] transition-colors"
+        >
+          Позвонить
+        </a>
+        <a
+          href="https://wa.me/79120330555"
+          class="bg-green-500 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-green-600 transition-colors"
+        >
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+</Layout>

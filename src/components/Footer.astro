@@ -1,0 +1,178 @@
+---
+const currentYear = new Date().getFullYear();
+
+// Функция для генерации случайного размера пузырька
+const getRandomSize = () => {
+  const sizes = [20, 30, 40, 50, 60, 70];
+  return sizes[Math.floor(Math.random() * sizes.length)];
+};
+
+// Создаем массив пузырьков с разными размерами
+const bubbles = [...Array(15)].map(() => ({
+  size: getRandomSize(),
+  left: Math.random() * 100,
+  delay: Math.random() * 5,
+  duration: 8 + Math.random() * 4,
+}));
+
+const workingHours = {
+  weekdays: "Пн-Пт: 9:00 - 18:00",
+  weekends: "Сб-Вс: 10:00 - 16:00",
+};
+---
+
+<footer
+  class="relative bg-gradient-to-b from-[#1a4b84] to-[#0a2b4a] text-white py-16 px-8 overflow-hidden font-['Dela_Gothic_One']"
+>
+  <div class="absolute inset-0 overflow-hidden">
+    {
+      bubbles.map((bubble, i) => (
+        <div
+          class="absolute bottom-[-100px] bg-white/10 rounded-full opacity-50 animate-bubble"
+          style={`width: ${bubble.size}px; height: ${bubble.size}px; left: ${bubble.left}%; animation-delay: ${bubble.delay}s; animation-duration: ${bubble.duration}s;`}
+        />
+      ))
+    }
+  </div>
+
+  <div
+    class="relative z-10 grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto"
+  >
+    <div class="p-4">
+      <h3 class="text-xl mb-4 font-bold">Контакты</h3>
+      <div class="space-y-3">
+        <p class="flex items-center gap-2">
+          <i class="fas fa-phone-alt"></i>
+          <a
+            href="tel:+79120330555"
+            class="hover:text-[#4fc3f7] transition-colors">+7 (912) 033-05-55</a
+          >
+        </p>
+        <p class="flex items-center gap-2">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>г. Екатеринбург, ул. Педагогическая, 8а, офис 505</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="p-4">
+      <h3 class="text-xl mb-4 font-bold">Режим работы</h3>
+      <div class="space-y-2">
+        <p class="flex items-center gap-2">
+          <i class="fas fa-clock"></i>
+          <span>{workingHours.weekdays}</span>
+        </p>
+        <p class="flex items-center gap-2">
+          <i class="fas fa-clock"></i>
+          <span>{workingHours.weekends}</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="p-4">
+      <h3 class="text-xl mb-4 font-bold">Навигация</h3>
+      <nav>
+        <ul class="space-y-2">
+          <li>
+            <a
+              href="/"
+              class="hover:text-[#4fc3f7] transition-colors flex items-center gap-2"
+            >
+              <i class="fas fa-home"></i>
+              Главная
+            </a>
+          </li>
+          <li>
+            <a
+              href="/about"
+              class="hover:text-[#4fc3f7] transition-colors flex items-center gap-2"
+            >
+              <i class="fas fa-tools"></i>
+              Обслуживание
+            </a>
+          </li>
+          <li>
+            <a
+              href="/services"
+              class="hover:text-[#4fc3f7] transition-colors flex items-center gap-2"
+            >
+              <i class="fas fa-paint-brush"></i>
+              Аквадизайн
+            </a>
+          </li>
+          <li>
+            <a
+              href="/portfolio"
+              class="hover:text-[#4fc3f7] transition-colors flex items-center gap-2"
+            >
+              <i class="fas fa-fish"></i>
+              Аквариумы
+            </a>
+          </li>
+          <li>
+            <a
+              href="/contacts"
+              class="hover:text-[#4fc3f7] transition-colors flex items-center gap-2"
+            >
+              <i class="fas fa-water"></i>
+              Морские аквариумы
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="p-4">
+      <h3 class="text-xl mb-4 font-bold">Социальные сети</h3>
+      <div class="flex gap-4">
+        <a
+          href="https://t.me/your_channel"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-2xl hover:text-[#4fc3f7] transition-colors hover:scale-110 transform duration-300"
+        >
+          <i class="fab fa-telegram fa-2x"></i>
+        </a>
+        <a
+          href="https://vk.com/aquaural"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-2xl hover:text-[#4fc3f7] transition-colors hover:scale-110 transform duration-300"
+        >
+          <i class="fab fa-vk fa-2x"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="relative z-10 text-center mt-8 pt-8 border-t border-white/10">
+    <p class="text-sm opacity-80">
+      &copy; {currentYear} АкваУрал. Все права защищены.
+    </p>
+  </div>
+</footer>
+
+<style>
+  @keyframes bubble {
+    0% {
+      bottom: -100px;
+      transform: translateX(0) scale(1);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.5;
+    }
+    90% {
+      opacity: 0.5;
+    }
+    100% {
+      bottom: 1080px;
+      transform: translateX(-200px) scale(0.8);
+      opacity: 0;
+    }
+  }
+
+  .animate-bubble {
+    animation: bubble 10s linear infinite;
+  }
+</style>

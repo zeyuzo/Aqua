@@ -1,0 +1,173 @@
+---
+const menuItems = [
+  {
+    title: "Обслуживание",
+    href: "/service",
+    icon: "fa-tools",
+    description: "Профессиональный уход за аквариумами",
+  },
+  {
+    title: "Аквадизайн",
+    href: "/aquadesign",
+    icon: "fa-paint-brush",
+    description: "Создание уникальных подводных ландшафтов",
+  },
+  {
+    title: "Аквариумы",
+    href: "/aquariums",
+    icon: "fa-fish",
+    description: "Продажа и установка пресноводных аквариумов",
+  },
+  {
+    title: "Морской",
+    href: "/marine",
+    icon: "fa-water",
+    description: "Морские аквариумы и их обитатели",
+  },
+];
+
+const contactInfo = {
+  phone: "+7 (912) 033-05-55",
+  workingHours: "Пн-Пт: 9:00 - 18:00",
+  address: "г. Екатеринбург, ул. Педагогическая, 8а, офис 505",
+};
+
+// Функция для генерации случайного размера пузырька
+const getRandomSize = () => {
+  const sizes = [20, 30, 40, 50, 60, 70];
+  return sizes[Math.floor(Math.random() * sizes.length)];
+};
+
+// Создаем массив пузырьков с разными размерами
+const bubbles = [...Array(15)].map(() => ({
+  size: getRandomSize(),
+  left: Math.random() * 100,
+  delay: Math.random() * 5,
+  duration: 8 + Math.random() * 4,
+}));
+---
+
+<div x-data="{ isOpen: false }">
+  <header
+    class="bg-gradient-to-r from-[#1a4b84] to-[#0a2b4a] text-white shadow-lg relative overflow-hidden"
+  >
+    {/* Анимированные пузырьки */}
+    <div class="absolute inset-0 overflow-hidden">
+      {
+        bubbles.map((bubble, i) => (
+          <div
+            class="absolute bottom-[-100px] bg-white/10 rounded-full opacity-50 animate-bubble"
+            style={`width: ${bubble.size}px; height: ${bubble.size}px; left: ${bubble.left}%; animation-delay: ${bubble.delay}s; animation-duration: ${bubble.duration}s;`}
+          />
+        ))
+      }
+    </div>
+
+    
+
+    {/* Основной header */}
+    <div class="py-6 px-6 relative z-10">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3 group">
+          <i
+            class="fa-sharp fa-solid fa-fish fa-4x text-[#4fc3f7] group-hover:scale-110 transition-transform duration-300"
+          ></i>
+          <div class="flex flex-col">
+            <span
+              class="text-4xl font-['Dela_Gothic_One'] group-hover:text-[#4fc3f7] transition-colors"
+              >АкваУрал</span
+            >
+            <span class="text-sm text-[#4fc3f7] opacity-80 font-bold"
+              >Профессиональный аквариумный сервис</span
+            >
+          </div>
+        </a>
+
+        {/* Десктопное меню */}
+        <nav class="hidden md:flex items-center gap-8">
+          {
+            menuItems.map((item) => (
+              <a
+                href={item.href}
+                class="relative px-4 py-2 text-lg hover:text-[#4fc3f7] transition-colors group"
+              >
+                <div class="flex items-center gap-2 mb-1">
+                  <i class={`fas ${item.icon} text-[#4fc3f7] text-xl`} />
+                  <span class="font-bold text-xl">{item.title}</span>
+                </div>
+                <div class="text-sm opacity-80 group-hover:opacity-100 transition-opacity font-bold">
+                  {item.description}
+                </div>
+                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#4fc3f7] transition-all duration-300 group-hover:w-full" />
+              </a>
+            ))
+          }
+        </nav>
+
+        {/* Кнопка бургер-меню */}
+        <button
+          @click="isOpen = !isOpen"
+          class="md:hidden text-white hover:text-[#4fc3f7] transition-colors p-2 rounded-lg hover:bg-[#2a5d96]"
+          aria-label="Открыть меню"
+        >
+          <i
+            class="fas"
+            :class="isOpen ? 'fa-times' : 'fa-bars'"
+            class="text-2xl"></i>
+        </button>
+      </div>
+    </div>
+
+    {/* Мобильное меню */}
+    <div
+      x-show="isOpen"
+      x-transition:enter="transition ease-out duration-300"
+      x-transition:enter-start="opacity-0 transform -translate-y-3"
+      x-transition:enter-end="opacity-100 transform translate-y-0"
+      x-transition:leave="transition ease-in duration-200"
+      x-transition:leave-start="opacity-100 transform translate-y-0"
+      x-transition:leave-end="opacity-0 transform -translate-y-3"
+      class="md:hidden bg-[#0a2b4a] relative z-10"
+    >
+      <nav class="flex flex-col py-2">
+        {
+          menuItems.map((item) => (
+            <a
+              href={item.href}
+              @click="isOpen = false"
+              class="px-6 py-4 text-base hover:bg-[#2a5d96] hover:text-[#4fc3f7] transition-colors"
+            >
+              <div class="flex items-center gap-3 mb-1">
+                <i class={`fas ${item.icon} text-[#4fc3f7] text-xl`} />
+                <span class="font-bold text-lg">{item.title}</span>
+              </div>
+              <div class="text-sm opacity-80 pl-9 font-bold">
+                {item.description}
+              </div>
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+  </header>
+</div>
+
+<style>
+  @keyframes bubble {
+    0% {
+      bottom: -100px;
+      transform: translateX(0) scale(1);
+    }
+    50% {
+      transform: translate(100px, -500px) scale(1.2);
+    }
+    100% {
+      bottom: 1080px;
+      transform: translateX(-200px) scale(0.8);
+    }
+  }
+
+  .animate-bubble {
+    animation: bubble 10s infinite ease-in;
+  }
+</style>
