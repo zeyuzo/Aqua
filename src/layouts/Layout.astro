@@ -7,19 +7,24 @@ import Header from "../components/Header.astro";
 <!doctype html>
 <html lang="en">
   <head>
-    <link rel="preload" href="https://fonts.googleapis.com" />
-    <link rel="preload" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
       href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap"
-      rel="stylesheet"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <title>АкваУрал</title>
   </head>
   <body class="min-h-screen flex flex-col">
-	<Header />
+    <Header />
     <main class="flex-grow">
       <slot />
     </main>
